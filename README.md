@@ -2,3 +2,11 @@ tools
 =====
 
 Operations tools
+
+Various tools that I use everyday for Operations.
+
+gigasync (forked from http://matthew.mceachen.us/geek/gigasync/gigasync.pod.html)
+         Perl tool that enables rsync to mirror enormous directory trees.
+
+syncdir  shell script to copy large directory (lots of files) to another server.
+
