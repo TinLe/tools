@@ -1,0 +1,74 @@
+#!/usr/bin/env python
+
+## GENERATED FILE - DO NOT EDIT
+
+import urllib2
+import sys
+import time
+import os
+import re
+from socket import socket
+
+# graphite-a-1.qts.melodis.com (10.0.0.30)
+CARBON_SERVER = '127.0.0.1'
+CARBON_PORT = 2003
+
+try:
+    import json
+except ImportError:
+    import simplejson as json
+
+
+def getServerStatus():
+    host = os.environ.get("host", "127.0.0.1")
+    port = 28017
+    url = "http://%s:%d/_status" % (host, port)
+    req = urllib2.Request(url)
+    user = os.environ.get("user")
+    password = os.environ.get("password")
+    if user and password:
+        passwdmngr = urllib2.HTTPPasswordMgrWithDefaultRealm()
+        passwdmngr.add_password(None, 'http://%s:%d' % (host, port), user, password)
+        authhandler = urllib2.HTTPDigestAuthHandler(passwdmngr)
+        opener = urllib2.build_opener(authhandler)
+        urllib2.install_opener(opener)
+    raw = urllib2.urlopen(req).read()
+    return json.loads( raw )["serverStatus"]
+
+name = "connections"
+
+def doData():
+    lines = []
+    m = re.search('^[^.]+', os.environ.get("host", "127.0.0.1"))
+    hostname = m.group(0)
+    dc = os.environ.get("dc")
+    if dc is not None:
+        dc = "." + dc
+    else:
+        dc = ""
+    now = int( time.time() )
+    # print name + ".value " + str( getServerStatus()["connections"]["current"] )
+    lines.append("mongodb." + hostname + dc + ".conn.%s %s %d" % (name, str(getServerStatus()["connections"]["current"]), now))
+    return lines
+
+
+
+def sendData(data):
+    # sock = socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock = socket()
+    try:
+          sock.connect( (CARBON_SERVER,CARBON_PORT) )
+    except:
+          print "Couldn't connect to %(server)s on port %(port)d, is carbon-agent.py running?" % { 'server':
+                  CARBON_SERVER, 'port':CARBON_PORT }
+          sys.exit(1)
+    sock.sendall(data)
+    sock.close()
+
+
+if __name__ == "__main__":
+    lines = doData()
+    mesg = '\n'.join(lines) + '\n'
+    # print "\nlines: %s" % (mesg)
+    sendData(mesg)
+

@@ -24,6 +24,9 @@
 
 # <http://matthew.mceachen.us/geek/gigasync/>
 
+# Modified by Tin Le tin@le.org
+# git@github.com:TinLe/tools.git
+
 use strict;
 
 use Env;
@@ -40,18 +43,26 @@ my $help = 0;
 my $run_size = 1024*1024*128;   #128 Mb
 my $exclude_pattern;
 my $verbose;
+my $dest_dir = "/hold1/unified-tmp-1-090512";
 
-# DON'T INCLUDE ANY OPTIONS THAT INFER --recusive (like --archive)!
+# DON'T INCLUDE ANY OPTIONS THAT INFER --recursive (like --archive)!
+sub sanitize_options {
+  (my $sanitized) = $@;
+  
+  $sanitized =~ m#-(a|-archive|r|-recursive)##s;
+  #return $sanitized;
+}
 
-my $rsync_options = '-lptgoD --no-implied-dirs --log-format="%t %f (%l bytes)" ';
-$rsync_options .= $ENV{RSYNC_OPTIONS} if $ENV{RSYNC_OPTIONS};
+my $rsync_options = '-lptgoDW --no-implied-dirs --timeout=900 --contimeout=30 --remove-sent-files --log-format="%t %f (%l bytes)" ';
+$rsync_options .= sanitize_options($ENV{RSYNC_OPTIONS}) if $ENV{RSYNC_OPTIONS};
 
 GetOptions('help|?|h' => \$help, 
-	   'man' => \$man,
-           'verbose' => \$verbose,
-	   'run-size:i' => \$run_size,
-	   'exclude_pattern:s' => \$exclude_pattern
-          ) or pod2usage(2);
+  'man' => \$man,
+      'verbose' => \$verbose,
+  'run-size:i' => \$run_size,
+  'destdir:s' => \$dest_dir,
+  'exclude_pattern:s' => \$exclude_pattern
+) or pod2usage(2);
 pod2usage(1) if $help;
 pod2usage(-exitstatus => 0, -verbose => 2) if $man;
 
@@ -76,7 +87,7 @@ sub run_rsync() {
   my $retries = 5;
   while ($retries--) {
     close $OUT;
-    my $rsync_status = system("rsync ".$rsync_options." --files-from=".$OUT->filename." / ".$dest_host.":/");
+    my $rsync_status = system("rsync ".$rsync_options." --files-from=".$OUT->filename." / ".$dest_host.":/".$dest_dir);
     $rsync_status >>= 8;
     return if ($rsync_status == 0);
     if ($rsync_status == 12) {
@@ -150,6 +161,10 @@ gigasync [OPTION]... SRCDIR DESTHOST
 =head1 OPTIONS
 
 =over 8
+
+=item B<--destdir>
+
+The destination directory to copy source to.
 
 =item B<--run-size>
 
