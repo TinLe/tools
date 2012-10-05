@@ -11,7 +11,6 @@ def doData():
     else:
         dc = ""
     now = int( time.time() )
-    # print name + ".value " + str( getServerStatus()["connections"]["current"] )
     lines.append("mongodb." + hostname + dc + ".conn.%s %s %d" % (name, str(getServerStatus()["connections"]["current"]), now))
     return lines
 

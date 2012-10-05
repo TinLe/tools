@@ -14,5 +14,5 @@ def doData():
     now = int( time.time() )
     for k,v in getServerStatus()["mem"].iteritems():
         if ok(k):
-            lines.append("mongodb." + hostname + dc + ".mem.%s %s %d" % (str(k), str(v * 1024 * 1024), now))
+            lines.append("mongodb." + hostname + dc + ".mem.%s %s %d" % (str(k), str(v*1024*1024), now))
     return lines

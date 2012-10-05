@@ -11,8 +11,8 @@ def doData():
         dc = "." + dc
     else:
         dc = ""
-    now = int( time.time() )
+    now = int(time.time())
     for k,v in get().iteritems():
-        lines.append("mongodb." + hostname + dc + ".btree.%s %s %d" % ( str(k), str(int(v)), now ))
+        lines.append("mongodb." + hostname + dc + ".btree.%s %s %d" % (str(k), str(int(v)), now))
     return lines
 
