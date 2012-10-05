@@ -13,12 +13,18 @@ it is in.
 
 My graphite storage-schema.conf is something like this:
 
+{
+
 [mongodb]
 pattern = ^mongodb\.
 retentions = 60:30d,900:365d
 
+}
+
 
 so I have:
+
+{
 
 mongodb.foo.bar.btree.accesses
 mongodb.foo.bar.btree.hits
@@ -26,6 +32,7 @@ mongodb.foo.bar.btree.missRatio
 mongodb.foo.bar.btree.misses
 mongodb.foo.bar.btree.resets
 
+}
 
 
 Monitoring scripts
