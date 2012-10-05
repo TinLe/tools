@@ -4,35 +4,31 @@ Graphite monitoring for MongoDB
 
 Modified from the Munin plugins for MongoDB by Eliot (https://github.com/erh/mongo-munin)
 
-I put them in my crontab like so
+    I put them in my crontab like so
 
 */5 * * * * host=foo.bar.baz.com dc=bar mongo_btree
 
-Where host is the FQDN of the mongodb server I want to monitor and dc is the data center
-it is in.
+    Where host is the FQDN of the mongodb server I want to monitor and dc is the data center
+    it is in.
 
-My graphite storage-schema.conf is something like this:
-
-{
-
-[mongodb]
-pattern = ^mongodb\.
-retentions = 60:30d,900:365d
-
-}
+    My graphite storage-schema.conf is something like this:
 
 
-so I have:
+    [mongodb]
+    pattern = ^mongodb\.
+    retentions = 60:30d,900:365d
 
-{
 
-mongodb.foo.bar.btree.accesses
-mongodb.foo.bar.btree.hits
-mongodb.foo.bar.btree.missRatio
-mongodb.foo.bar.btree.misses
-mongodb.foo.bar.btree.resets
 
-}
+    so I have:
+
+
+    mongodb.foo.bar.btree.accesses
+    mongodb.foo.bar.btree.hits
+    mongodb.foo.bar.btree.missRatio
+    mongodb.foo.bar.btree.misses
+    mongodb.foo.bar.btree.resets
+
 
 
 Monitoring scripts
