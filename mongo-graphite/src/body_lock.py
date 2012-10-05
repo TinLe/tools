@@ -12,7 +12,7 @@ def doData():
         dc = ""
     now = int( time.time() )
     # lines.append("mongodb." + hostname + ".lock.%s %s %d" % ( name, str( 100 * getServerStatus()["globalLock"]["ratio"] ), now ))
-    lines.append("mongodb." + hostname + dc + ".lock.totalTime.%s %s %d" % ( name, str( 100 * getServerStatus()["globalLock"]["totalTime"] ), now ))
-    lines.append("mongodb." + hostname + dc + ".lock.lockTime.%s %s %d" % ( name, str( 100 * getServerStatus()["globalLock"]["lockTime"] ), now ))
+    lines.append("mongodb." + hostname + dc + ".lock.totalTime %s %d" % (str( 100 * getServerStatus()["globalLock"]["totalTime"]), now))
+    lines.append("mongodb." + hostname + dc + ".lock.lockTime %s %d" % (str( 100 * getServerStatus()["globalLock"]["lockTime"]), now))
     return lines
 

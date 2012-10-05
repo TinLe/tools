@@ -9,7 +9,7 @@ import os
 import re
 from socket import socket
 
-# graphite-a-1.qts.melodis.com (10.0.0.30)
+# graphite-a-1 (10.0.0.30)
 CARBON_SERVER = '127.0.0.1'
 CARBON_PORT = 2003
 
@@ -35,6 +35,7 @@ def getServerStatus():
     raw = urllib2.urlopen(req).read()
     return json.loads( raw )["serverStatus"]
 
+
 name = "locked"
 
 def doData():
@@ -48,8 +49,8 @@ def doData():
         dc = ""
     now = int( time.time() )
     # lines.append("mongodb." + hostname + ".lock.%s %s %d" % ( name, str( 100 * getServerStatus()["globalLock"]["ratio"] ), now ))
-    lines.append("mongodb." + hostname + dc + ".lock.totalTime.%s %s %d" % ( name, str( 100 * getServerStatus()["globalLock"]["totalTime"] ), now ))
-    lines.append("mongodb." + hostname + dc + ".lock.lockTime.%s %s %d" % ( name, str( 100 * getServerStatus()["globalLock"]["lockTime"] ), now ))
+    lines.append("mongodb." + hostname + dc + ".lock.totalTime %s %d" % (str( 100 * getServerStatus()["globalLock"]["totalTime"]), now))
+    lines.append("mongodb." + hostname + dc + ".lock.lockTime %s %d" % (str( 100 * getServerStatus()["globalLock"]["lockTime"]), now))
     return lines
 
 

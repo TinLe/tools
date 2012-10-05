@@ -9,7 +9,7 @@ import os
 import re
 from socket import socket
 
-# graphite-a-1.qts.melodis.com (10.0.0.30)
+# graphite-a-1 (10.0.0.30)
 CARBON_SERVER = '127.0.0.1'
 CARBON_PORT = 2003
 
@@ -34,6 +34,7 @@ def getServerStatus():
         urllib2.install_opener(opener)
     raw = urllib2.urlopen(req).read()
     return json.loads( raw )["serverStatus"]
+
 
 def get():
     return getServerStatus()["indexCounters"]["btree"]
