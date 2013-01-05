@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 
 use Getopt::Long;
 use Date::Parse;
@@ -73,7 +73,7 @@ for ($i=0; $i<=$#ARGV; $i++) {
       $hour = $3;
       $minute = $4;
       $sec = $5;
-      #$hostname = $6;
+      $hostname = $6;
       $timing = $7;
       $audio = $8;
       $omr1 = $9;
@@ -106,17 +106,17 @@ for ($i=0; $i<=$#ARGV; $i++) {
   }
   close(MYFILE) or die("Error closing file $ARGV[0]! $?\n");
 
-  printf("servers.com.melodis.%s.%s.timing %f\n", $datacenter, $host, $data{_timing}/$totalrecords);
-  printf("servers.com.melodis.%s.%s.audio %f\n", $datacenter, $host, $data{audio}/$totalrecords);
-  printf("servers.com.melodis.%s.%s.omr1 %f\n", $datacenter, $host, $data{omr1}/$totalrecords);
-  printf("servers.com.melodis.%s.%s.omr2 %f\n", $datacenter, $host, $data{omr2}/$totalrecords);
-  printf("servers.com.melodis.%s.%s.melody1 %f\n", $datacenter, $host, $data{melody1}/$totalrecords);
-  printf("servers.com.melodis.%s.%s.melody2 %f\n", $datacenter, $host, $data{melody2}/$totalrecords);
-  printf("servers.com.melodis.%s.%s.speech1 %f\n", $datacenter, $host, $data{speech1}/$totalrecords);
-  printf("servers.com.melodis.%s.%s.speech2 %f\n", $datacenter, $host, $data{speech2}/$totalrecords);
-  printf("servers.com.melodis.%s.%s.api %f\n", $datacenter, $host, $data{api}/$totalrecords);
-  printf("servers.com.melodis.%s.%s.sing1 %f\n", $datacenter, $host, $data{sing1}/$totalrecords);
-  printf("servers.com.melodis.%s.%s.sing2 %f\n", $datacenter, $host, $data{sing2}/$totalrecords);
+  printf("%s.timing %f\n", $host, $data{_timing}/$totalrecords);
+  printf("%s.audio %f\n", $host, $data{audio}/$totalrecords);
+  printf("%s.omr1 %f\n", $host, $data{omr1}/$totalrecords);
+  printf("%s.omr2 %f\n", $host, $data{omr2}/$totalrecords);
+  printf("%s.melody1 %f\n", $host, $data{melody1}/$totalrecords);
+  printf("%s.melody2 %f\n", $host, $data{melody2}/$totalrecords);
+  printf("%s.speech1 %f\n", $host, $data{speech1}/$totalrecords);
+  printf("%s.speech2 %f\n", $host, $data{speech2}/$totalrecords);
+  printf("%s.api %f\n", $host, $data{api}/$totalrecords);
+  printf("%s.sing1 %f\n", $host, $data{sing1}/$totalrecords);
+  printf("%s.sing2 %f\n", $host, $data{sing2}/$totalrecords);
 }
 
 1;
