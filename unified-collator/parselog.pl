@@ -77,17 +77,17 @@ for ($i=0; $i<=$#ARGV; $i++) {
 		my $datetime = "$day $month $YEAR $hour:$minute:$sec";
 		my $time = (str2time($datetime) ? str2time($datetime): 0);
 
-        printf("timing.%s.%s.melodis.com %f %d\n", $host, $datacenter, $timing, $time);
-        printf("audio.%s.%s.melodis.com %f %d\n", $host, $datacenter, $audio, $time);
-        printf("omr1.%s.%s.melodis.com %f %d\n", $host, $datacenter, $omr1, $time);
-        printf("omr2.%s.%s.melodis.com %f %d\n", $host, $datacenter, $omr2, $time);
-        printf("melody1.%s.%s.melodis.com %f %d\n", $host, $datacenter, $melody1, $time);
-        printf("melody2.%s.%s.melodis.com %f %d\n", $host, $datacenter, $melody2, $time);
-        printf("speech1.%s.%s.melodis.com %f %d\n", $host, $datacenter, $speech1, $time);
-        printf("speech2.%s.%s.melodis.com %f %d\n", $host, $datacenter, $speech2, $time);
-        printf("api.%s.%s.melodis.com %f %d\n", $host, $datacenter, $api, $time);
-        printf("sing1.%s.%s.melodis.com %f %d\n", $host, $datacenter, $sing1, $time);
-        printf("sing2.%s.%s.melodis.com %f %d\n", $host, $datacenter, $sing2, $time);
+        printf("timing.%s.%s.melodis.com %f\n", $host, $datacenter, $timing);
+        printf("audio.%s.%s.melodis.com %f\n", $host, $datacenter, $audio);
+        printf("omr1.%s.%s.melodis.com %f\n", $host, $datacenter, $omr1);
+        printf("omr2.%s.%s.melodis.com %f\n", $host, $datacenter, $omr2);
+        printf("melody1.%s.%s.melodis.com %f\n", $host, $datacenter, $melody1);
+        printf("melody2.%s.%s.melodis.com %f\n", $host, $datacenter, $melody2);
+        printf("speech1.%s.%s.melodis.com %f\n", $host, $datacenter, $speech1);
+        printf("speech2.%s.%s.melodis.com %f\n", $host, $datacenter, $speech2);
+        printf("api.%s.%s.melodis.com %f\n", $host, $datacenter, $api);
+        printf("sing1.%s.%s.melodis.com %f\n", $host, $datacenter, $sing1);
+        printf("sing2.%s.%s.melodis.com %f\n", $host, $datacenter, $sing2);
 	}
   }
   close(MYFILE) or die("Error closing file $ARGV[0]! $?\n");
