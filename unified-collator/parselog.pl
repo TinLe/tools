@@ -106,17 +106,17 @@ for ($i=0; $i<=$#ARGV; $i++) {
   }
   close(MYFILE) or die("Error closing file $ARGV[0]! $?\n");
 
-  printf("%s.timing %f\n", $host, $data{_timing}/$totalrecords);
-  printf("%s.audio %f\n", $host, $data{audio}/$totalrecords);
-  printf("%s.omr1 %f\n", $host, $data{omr1}/$totalrecords);
-  printf("%s.omr2 %f\n", $host, $data{omr2}/$totalrecords);
-  printf("%s.melody1 %f\n", $host, $data{melody1}/$totalrecords);
-  printf("%s.melody2 %f\n", $host, $data{melody2}/$totalrecords);
-  printf("%s.speech1 %f\n", $host, $data{speech1}/$totalrecords);
-  printf("%s.speech2 %f\n", $host, $data{speech2}/$totalrecords);
-  printf("%s.api %f\n", $host, $data{api}/$totalrecords);
-  printf("%s.sing1 %f\n", $host, $data{sing1}/$totalrecords);
-  printf("%s.sing2 %f\n", $host, $data{sing2}/$totalrecords);
+  printf("timing %f\n", $data{_timing}/$totalrecords);
+  printf("audio %f\n", $data{audio}/$totalrecords);
+  printf("omr1 %f\n", $data{omr1}/$totalrecords);
+  printf("omr2 %f\n", $data{omr2}/$totalrecords);
+  printf("melody1 %f\n", $data{melody1}/$totalrecords);
+  printf("melody2 %f\n", $data{melody2}/$totalrecords);
+  printf("speech1 %f\n", $data{speech1}/$totalrecords);
+  printf("speech2 %f\n", $data{speech2}/$totalrecords);
+  printf("api %f\n", $data{api}/$totalrecords);
+  printf("sing1 %f\n", $data{sing1}/$totalrecords);
+  printf("sing2 %f\n", $data{sing2}/$totalrecords);
 }
 
 1;
