@@ -47,5 +47,6 @@
 REPOS="$1"
 REV="$2"
 
-/melodis/svn/android/hooks/commit-email.pl \
-  "$REPOS" "$REV" --from svncommit_android@svn-a-1.melodis.com svncommit_android@soundhound.com 
+#/melodis/svn/android/hooks/commit-email.pl \
+#  "$REPOS" "$REV" --from svncommit_android@svn-a-1.melodis.com svncommit_android@soundhound.com 
+/usr/local/bin/svn-mailer.py commit "$1" "$2" /melodis/svn/android/hooks/mailer.conf
