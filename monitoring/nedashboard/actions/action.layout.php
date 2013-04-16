@@ -35,13 +35,13 @@ foreach ($_GET["element"] as $element) {
             $value="space";
         }
     } else {
-        //type is tacho(either performance or avaiability)=> no type information needed
+        //type is tacho(either performance or availability)=> no type information needed
         $type=$e[1];
         if ($type=="Tacho") {
             //type is performance tacho
             $value=$e[2].".".$e[3].".".$e[4];
         } else {
-            //type is avaiability tacho
+            //type is availability tacho
             $value=$e[2];
             if (count($e)==4) {
                 $value.=".".$e[3];
@@ -51,7 +51,7 @@ foreach ($_GET["element"] as $element) {
 
     //add element, if it is not a tacho, it needs autogeneration of xml id.
 	//echo "Debug: ".$element." Count: ".count($e)." VALUE: ".$value;
-    $elementDAO->addElement($value,$type,!($type=="Tacho" || $type=="Avaiability"));
+    $elementDAO->addElement($value,$type,!($type=="Tacho" || $type=="Availability"));
 }
 if (!$elementDAO->persist()){
 	?><script>
@@ -60,5 +60,5 @@ if (!$elementDAO->persist()){
 }
 ?>
 <script>
-    window.location="../configLayout.php?board=<?= $_GET["board"]; ?>&msg=Board layout applied successfully";
+    window.location="../configLayout.php?board=<?php= $_GET["board"]; ?>&msg=Board layout applied successfully";
 </script>

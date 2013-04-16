@@ -1,7 +1,7 @@
 <?php
-include_once dirname(__FILE__).'/../dataSources/avaiability/scanner/class.scannerFactory.php';
-include_once dirname(__FILE__).'/../dataSources/avaiability/scanner/class.dataScanner.php';
-include_once dirname(__FILE__).'/../dataSources/avaiability/parser/class.parserFactory.php';
+include_once dirname(__FILE__).'/../dataSources/availability/scanner/class.scannerFactory.php';
+include_once dirname(__FILE__).'/../dataSources/availability/scanner/class.dataScanner.php';
+include_once dirname(__FILE__).'/../dataSources/availability/parser/class.parserFactory.php';
 include_once(dirname(__FILE__)."/../includes/config.NetEye.php.inc");
 include_once(dirname(__FILE__)."/../dataSources/performance/class.globalSettingsDAO.php");
 include_once 'class.abstractDataProvider.php';
@@ -132,5 +132,4 @@ class parsedHost extends abstractDataProvider {
     	
     }
 }
-
 ?>

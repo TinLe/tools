@@ -31,7 +31,7 @@ $host->persist();
 $element->persist();
 
 //print selection for html select filled with AJAX
-$avaiable = new configHostDAO(".");
+$available = new configHostDAO(".");
 $sHostNames=array();
 $aHostNames=array();
 
@@ -39,8 +39,8 @@ foreach ($host->gethosts() as $hostId) {
     //get all hostnames already selected
     $sHostNames[]=$host->getName($hostId);
 }
-foreach ($avaiable->getElements() as $hostName) {
-    //get all hostnames avaiable
+foreach ($available->getElements() as $hostName) {
+    //get all hostnames available
     if (!$host->contains($hostName)) {
         //if they are not contained in selected hostNames
         $aHostNames[]=$hostName;

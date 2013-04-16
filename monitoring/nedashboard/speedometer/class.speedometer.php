@@ -1,5 +1,4 @@
 <?php
-
 include_once 'class.dataProviderFactory.php';
 include_once 'class.urlCleaner.php';
 
@@ -298,12 +297,8 @@ class speedometer {
                                                 pluginspage="http://www.macromedia.com/go/getflashplayer">
                                         </embed>
                                 </object>';
-
-
         // return content string
         return $content;
-
     }
-
 }
 ?>

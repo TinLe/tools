@@ -27,15 +27,15 @@ $service->persist();
 $element->persist();
 
 //print selection for html select filled with AJAX
-$avaiability = new configServiceDAO($_GET["host"]);
+$availability = new configServiceDAO($_GET["host"]);
 $sServiceNames=array();
 $aServiceNames=array();
 foreach ($service->getServices() as $serviceId) {
     //get all servicenames already selected
     $sServiceNames[]=$service->getName($serviceId);
 }
-foreach ($avaiability->getElements() as $serviceName) {
-    //get all servicenames avaiable
+foreach ($availability->getElements() as $serviceName) {
+    //get all servicenames available
     //serviceName is the name of the xmlFile containing service data
     //therefore we must split the . to get service name
     //ex split(ping.xml) => [ping][xml]

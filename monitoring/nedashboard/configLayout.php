@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<?php /*
+<?php
+/*
 -------------------------------------------------------------------------
 Dashboard - Nagios Tachos Dashboard
 Copyright (C) 2009 by WUERTHPHOENIX Srl.
@@ -34,9 +34,8 @@ include_once("layout/class.image.element");
 include_once("layout/class.tacho.element"); ?>
 <html>
     <head>
-        <title>NetEye Dashboard v. <? echo $version; ?></title>
+        <title>NetEye Dashboard v. <?php echo $version; ?></title>
 		<link rel="stylesheet" type="text/css" href="./css/main.css" />
-		
         <style>
             .sortHelper
             {
@@ -44,7 +43,7 @@ include_once("layout/class.tacho.element"); ?>
                 float: left;
             }
             .itemContainer {
-            width: <?=$DB_tachosInRow*200+$DB_tachosInRow*4?>px;
+            width: <?php $DB_tachosInRow*200+$DB_tachosInRow*4?>px;
             height: 5000px;
             float:none;
         }
@@ -78,22 +77,17 @@ include_once("layout/class.tacho.element"); ?>
             opacity: 0.7;
             overflow:auto;
         }
-
         div#drop:hover {
             cursor: pointer;
         }
-
         </style>
-
         <script src="js/jQuery/jquery.js"></script>
         <script src="js/jQuery/jquery.ui.core.js"></script>
         <script src="js/jQuery/jquery.ui.sortable.js"></script>
         <script src="js/jQuery/jquery.ui.draggable.js"></script>
         <script src="js/jQuery/jquery.ui.droppable.js"></script>
         <script src="js/interface.js"></script>
-
         <script>
-
             $(document).ready(
             function () {
                 jQuery('#drop').Droppable({
@@ -141,9 +135,7 @@ include_once("layout/class.tacho.element"); ?>
                     tolerance: 'pointer'
                 });
             }
-
         );
-
 <?php
 $space=new space();
 $title=new title($DB_tachosInRow * 200 + $DB_tachosInRow * 4 - 2 * 2);
@@ -183,8 +175,7 @@ echo $image->createJSIdFunction();
         </script>
     </head>
     <body bgcolor="#c3c7d3">
-
-        <?
+        <?php
         $whereIam="layout";
         $jQuery=false;
         include 'includes/header.php';
@@ -194,13 +185,12 @@ echo $image->createJSIdFunction();
         if ($selectedBoard!=null) {
             $elementDAO = new elementDAO($selectedBoard);
         }
-
         ?>
-        <hr align="left" width="<?=$DB_tachosInRow * 200 + $DB_tachosInRow * 4 - 2 * 2?>px">
-        <table width="<?=$DB_tachosInRow * 200 + $DB_tachosInRow * 4 - 2 * 2?>px" cellspacing="0" cellpadding="2">
+        <hr align="left" width="<?php $DB_tachosInRow * 200 + $DB_tachosInRow * 4 - 2 * 2?>px">
+        <table width="<?php $DB_tachosInRow * 200 + $DB_tachosInRow * 4 - 2 * 2?>px" cellspacing="0" cellpadding="2">
             <tr>
             	<td align="left">
-            	<? if ((isset($_GET['msg'])) && ($_GET['msg'] != '')){
+            	<?php if ((isset($_GET['msg'])) && ($_GET['msg'] != '')){
             		echo "<font style=\"color: white;\" face=\"Verdana\" size=\"3\"><b>".$_GET['msg']."</b></font>";
             	} ?>
             	</td>
@@ -215,7 +205,7 @@ echo $image->createJSIdFunction();
                 </td>
             </tr>
         </table>
-        <table width="<?=$DB_tachosInRow * 200 + $DB_tachosInRow * 4 - 2 * 2?>">
+        <table width="<?php=$DB_tachosInRow * 200 + $DB_tachosInRow * 4 - 2 * 2?>">
             <tr><td width="160" valign="top" align="right">
                     <a class="button" onclick="submitForm('layoutForm');"><span>Apply Settings</span></a>
                 </td><td width="150" valign="top">
@@ -224,9 +214,8 @@ echo $image->createJSIdFunction();
                 <td align="right" valign="top"><div id="drop"></div></td>
             </tr>
         </table>
-
         <form name="layoutForm" action="actions/action.layout.php">
-            <input type="hidden" name="board" value="<?= $selectedBoard ?>" />
+            <input type="hidden" name="board" value="<?php= $selectedBoard ?>" />
 
             <div id="haha" class="itemContainer">
                 <?php
@@ -237,7 +226,7 @@ echo $image->createJSIdFunction();
                         $type = strtolower($type);
                         if ($type=="tacho") {
                             echo $tacho->createHTML($element["id"],$element["name"]);
-                        } else if ($type=="avaiability") {
+                        } else if ($type=="availability") {
                             echo $tacho->createHTML($element["id"],$element["name"]);
                         } else if ($type=="space") {
                             if (!isset($count[$type])) {
@@ -262,7 +251,6 @@ echo $image->createJSIdFunction();
                 }
                 ?>
             </div>
-
         </form>
     </body>
 </html>

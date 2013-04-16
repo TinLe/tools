@@ -1,4 +1,5 @@
-<?php /*
+<?php
+/*
 -------------------------------------------------------------------------
 Dashboard - Nagios Tachos Dashboard
 Copyright (C) 2009 by WUERTHPHOENIX Srl.
@@ -121,7 +122,7 @@ if ($selectedBoard!=null) {
         $sHostNames[]=$hostDAO->getName($hostId);
     }
     foreach ($host->getElements() as $hostName) {
-        //get all hostnames avaiable
+        //get all hostnames available
         if (!$hostDAO->contains($hostName)) {
             //if they are not contained in selected hostNames
             $aHostNames[]=$hostName;
@@ -148,7 +149,7 @@ if ($selected_host!=null) {
         $sServiceNames[]=$serviceDAO->getName($serviceId);
     }
     foreach ($service->getElements() as $serviceName) {
-        //get all servicenames avaiable
+        //get all servicenames available
         //serviceName is the name of the xmlFile containing service data
         //therefore we must split the . to get service name
         //ex split(ping.xml) => [ping][xml]
@@ -170,9 +171,7 @@ $info=array();
 $info["board"]=$selectedBoard;
 $info["host"]=$selected_host;
 echo $configForm->createFormTable($info, $selected_service."Select Service");
-?>
 
-<?php
 $sSourceNames=array();
 $sSourceLabels=array();
 $aSourceNames=array();
@@ -184,7 +183,7 @@ if ($selected_service!=null) {
         $sSourceLabels[]=$sourceDAO->getDetails($sourceDAO->getName($sourceId))->getLabel();
     }
     foreach ($source->getElements() as $sourceName) {
-        //get all sources avaiable
+        //get all sources available
         if (!$sourceDAO->contains($sourceName)) {
             //if they are not contained in selected sourceNames
             $aSourceNames[]=$sourceName;
@@ -209,8 +208,6 @@ echo $configForm->createFormTableCustom($info, $sSourceLabels, $aSourceLabels, "
 <table width="150px">
     <tr>
         <td width="40"></td>
-        <td><a id="btnEdit" class="button_disabled" onclick="javascript:edit(event, '<?=$selectedBoard?>');"><span>Edit</span></a></td>
+        <td><a id="btnEdit" class="button_disabled" onclick="javascript:edit(event, '<?php=$selectedBoard?>');"><span>Edit</span></a></td>
     </tr>
 </table>
-
-

@@ -1,5 +1,4 @@
 <?php
-
 class configureDAO {
 	//Location of RRD perfdata
 	const perfdataPath="/var/log/nagios/perfdata/";
@@ -19,5 +18,4 @@ class logManager {
 		}
 	}
 }
-
 ?>

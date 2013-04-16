@@ -72,7 +72,5 @@ include_once 'class.abstractDataProvider.php';
             }
             return $val[$ds];
         }
-
     }
-
 ?>

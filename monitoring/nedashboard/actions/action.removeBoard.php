@@ -1,6 +1,6 @@
 <?php
 include_once '../dataSources/performance/class.boardDAO.php';
-include_once '../dataSources/avaiability/class.boardDAO.php';
+include_once '../dataSources/availability/class.boardDAO.php';
 include_once '../layout/class.layoutDAO.php';
 
 require_once '../includes/config.php.inc';
@@ -8,7 +8,7 @@ require_once(dirname(__FILE__).'/../includes/config.NetEye.php.inc');
 
 $boardToDel=$_GET["board"];
 $board = new boardDAO();
-$boardAvaiable=new boardDAOAvaiable();
+$boardAvailable=new boardDAOAvailable();
 
 //If the board to delete is the default Board, this setting will be deleted from global settings.
 if ($DB_defaultBoard==$boardToDel){
@@ -31,9 +31,9 @@ if ($boardToDel != ""){
 	if ($board->contains($boardToDel)) {
 		logManager::writeToLog("OK: Deleting of performance obard: ".$boardToDel);
 		$boardDAO = new boardDAO();
-	} else if ($boardAvaiable->contains($boardToDel)) {
+	} else if ($boardAvailable->contains($boardToDel)) {
 		logManager::writeToLog("OK: Deleting of availability obard: ".$boardToDel);
-		$boardDAO = new boardDAOAvaiable();
+		$boardDAO = new boardDAOAvailable();
 	} else {
 		logManager::writeToLog("CRITICAL: Error deleting board ".$boardToDel." from configure File after delete of layout.");
 		die ("Error deleting board ".$boardToDel." from configure File after delete of layout.");
@@ -42,7 +42,7 @@ if ($boardToDel != ""){
 //$allBoards = $boardDAO->getBoards();
 //echo ("Debug: ". count($allBoards));
 //if (count($allBoards)==0) {
-//	$boardDAO=new boardDAOAvaiable();
+//	$boardDAO=new boardDAOAvailable();
 //}
 
 $boardDAO->removeBoard($boardToDel);

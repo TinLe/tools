@@ -1,4 +1,5 @@
-<?php /*
+<?php
+/*
 -------------------------------------------------------------------------
 Dashboard - Nagios Tachos Dashboard
 Copyright (C) 2009 by WUERTHPHOENIX Srl.
@@ -24,10 +25,10 @@ http://www.wuerth-phoenix.com
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  --------------------------------------------------------------------------
 */ 
-include_once 'dataSources/avaiability/class.hostDAO.php';
-include_once 'dataSources/avaiability/class.serviceDAO.php';
-include_once 'dataSources/avaiability/class.configHostDAO.php';
-include_once 'dataSources/avaiability/class.configServiceDAO.php';
+include_once 'dataSources/availability/class.hostDAO.php';
+include_once 'dataSources/availability/class.serviceDAO.php';
+include_once 'dataSources/availability/class.configHostDAO.php';
+include_once 'dataSources/availability/class.configServiceDAO.php';
 include_once './ajax/configForm/class.configFormFactory.php';
 include_once(dirname(__FILE__)."/includes/config.php.inc");
 
@@ -36,8 +37,8 @@ $selected_host=null;
 $selected_service=null;
 
 if ($selectedBoard!=null) {
-    $hostDAO = new hostDAOAvaiable($selectedBoard);
-    $host = new configHostDAOAvaiable(".");
+    $hostDAO = new hostDAOAvailable($selectedBoard);
+    $host = new configHostDAOAvailable(".");
     $selected_host=null;
     if (isset($_GET["host"])) {
         $selected_host = $_GET["host"];
@@ -60,7 +61,7 @@ if ($selectedBoard!=null) {
         $sHostNames[]=$hostDAO->getName($hostId);
     }
     foreach ($host->getElements() as $hostName) {
-        //get all hostnames avaiable
+        //get all hostnames available
         if (!$hostDAO->contains($hostName)) {
             //if they are not contained in selected hostNames
             $aHostNames[]=$hostName;
@@ -69,7 +70,7 @@ if ($selectedBoard!=null) {
 }
 
 //print host selection form
-$configForm = configFormFactory::getForm("hostFormAvaiable",$sHostNames,$aHostNames);
+$configForm = configFormFactory::getForm("hostFormAvailable",$sHostNames,$aHostNames);
 echo $configForm->createJS("callBackHost", "callBackHost");
 
 $info=array();
@@ -87,7 +88,7 @@ if ($selected_host!=null) {
         $sServiceNames[]=$serviceDAO->getName($serviceId);
     }
     foreach ($service->getElements() as $serviceName) {
-        //get all servicenames avaiable
+        //get all servicenames available
         //serviceName is the name of the xmlFile containing service data
         //therefore we must split the . to get service name
         //ex split(ping.xml) => [ping][xml]
@@ -102,7 +103,7 @@ if ($selected_host!=null) {
 }
 
 //print service selection form
-$configForm = configFormFactory::getForm("serviceFormAvaiable",$sServiceNames,$aServiceNames);
+$configForm = configFormFactory::getForm("serviceFormAvailable",$sServiceNames,$aServiceNames);
 echo $configForm->createJS(null, "callBackService");
 
 $info=array();
@@ -112,8 +113,8 @@ echo $configForm->createFormTable($info, $selected_service, "select Service");
 ?>
 <script type="text/javaScript">
     function callBackHost(host) {
-        document.serviceFormAvaiable["host"].value=host.value;
-        submitserviceFormAvaiable(-1);
+        document.serviceFormAvailable["host"].value=host.value;
+        submitserviceFormAvailable(-1);
     }
 
     function callBackService(service) {

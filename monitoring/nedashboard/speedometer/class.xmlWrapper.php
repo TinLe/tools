@@ -20,9 +20,7 @@ class xmlWrapper extends abstractDataProvider {
 
     function isActive() {
         include 'includes/config.php.inc';
-        
         return time()-filemtime($this->db) < $DB_minutesToBeInactive*60;
     }
 }
-
 ?>

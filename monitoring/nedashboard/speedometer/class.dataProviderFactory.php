@@ -8,8 +8,6 @@ include_once 'class.parsedHost.php';
 include_once 'class.parsedService.php';
 
 class dataProviderFactory {
-
-
     static function createDataProvider($source) {
         if ($source=="host") {
             return new parsedHost($source);
@@ -19,5 +17,4 @@ class dataProviderFactory {
         //return new rrdToolWrapper($source.".rrd");
     }
 }
-
 ?>

@@ -1,6 +1,5 @@
 <?php
 class urlCleaner {
-	
 	/*
 	 * Substitute special characters from string for url
 	 */

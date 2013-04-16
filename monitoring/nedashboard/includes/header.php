@@ -6,14 +6,11 @@ remove of current board
 
 Author: Marmsoler Diego
 -->
-
-<? require_once './includes/config.php.inc'; ?>
-
+<?php require_once './includes/config.php.inc'; ?>
 <!-- Import jQuery and SimpleModal source files -->
-<?if (!isset($jQuery) || $jQuery==true) {
+<?php if (!isset($jQuery) || $jQuery==true) {
     echo "<script src='js/jQuery/jquery.js' type='text/javascript'></script>";
 }?>
-
 <script>
 	function fullscreenEmpty() {
         window.open('indexFull.php','DashBoard','fullscreen=yes, location=no, scrollbars=yes');
@@ -27,28 +24,19 @@ Author: Marmsoler Diego
         }
     }
 </script>
-
 <script src='js/jQuery/jquery.simplemodal.js' type='text/javascript'></script>
-
 <!-- Contact Form JS and CSS files -->
 <script src='ajax/boardForm/dynamicForm.js' type='text/javascript'></script>
-
 <link type='text/css' href='css/contact.css' rel='stylesheet' media='screen' />
-
 <link rel="stylesheet" type="text/css" href="./css/dynTabs.css" />
 <link rel="stylesheet" type="text/css" href="./css/dynButtons.css" />
-
-
 <?php
 include 'dataSources/performance/class.boardDAO.php';
-include 'dataSources/avaiability/class.boardDAO.php';
-?>
-<?php
+include 'dataSources/availability/class.boardDAO.php';
 include('./includes/logo.php.inc');
-?>
-<?php
+
 $board = new boardDAO();
-$boardAvaiable=new boardDAOAvaiable();
+$boardAvailable=new boardDAOAvailable();
 
 $selectedBoard=null;
 if ((isset($_GET["board"]))&&($_GET['board'] != "")) {
@@ -61,18 +49,18 @@ if ((isset($_GET["board"]))&&($_GET['board'] != "")) {
 	if (count($allBoards)>0) {
 		$selectedBoard = $allBoards[0];
 	} else {
-		$allBoards =$boardAvaiable->getBoards();
+		$allBoards =$boardAvailable->getBoards();
 		if (count($allBoards)>0) {
 			$selectedBoard = $allBoards[0];
 		}
 	}
 }
 ?>
-<table style="margin-top: 5px;" <? echo $DB_formwidth; ?>px" cellspacing="0" cellpadding="0">
+<table style="margin-top: 5px;" <?php echo $DB_formwidth; ?>px" cellspacing="0" cellpadding="0">
     <tr>
         <td>
             <div style="z-index: 10;" id="links" style="text-decoration:none;">
-                <?
+                <?php
                 if ($whereIam=="index") {
                     echo '<a class="tab_pressed"><span>View</span></a>';
                 } else {
@@ -94,15 +82,12 @@ if ((isset($_GET["board"]))&&($_GET['board'] != "")) {
             </div>
             <table align="right" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td><img width="20px" height="23px" src="images/fullscreen_small.jpg" onclick="fullscreen('<?echo $selectedBoard;?>');"/></td>
-                    <?if (file_exists($nedashDocPath)) {
-                        ?>
+                    <td><img width="20px" height="23px" src="images/fullscreen_small.jpg" onclick="fullscreen('<?php echo $selectedBoard;?>');"/></td>
+                    <?php if (file_exists($nedashDocPath)) { ?>
                     <td><div align="right" ><input type="image" src="./images/info.gif" style="border: 0px; width: 25px;"
                                                            title="Documentation & Help"
-                                                   onclick="location='<? echo $dashWikiURL; ?>'"></div>
-                    </td><?
-                }
-                ?>
+                                                   onclick="location='<?php echo $dashWikiURL; ?>'"></div>
+                    </td><?php } ?>
                 </tr>
             </table>
             </td>
@@ -113,7 +98,7 @@ if ((isset($_GET["board"]))&&($_GET['board'] != "")) {
     </tr>
 </table>
 
-<table width="<? echo $DB_formwidth; ?>px" cellspacing="0" cellpadding="2">
+<table width="<?php echo $DB_formwidth; ?>px" cellspacing="0" cellpadding="2">
     <tr>
         <td width="300">
         <table border="1"><tr><td valign="middle" align="left">
@@ -124,7 +109,7 @@ if ((isset($_GET["board"]))&&($_GET['board'] != "")) {
             //Hack to fix the onChange action problem: If only one board is available the board is not shown after creation since 
             //no onChange() action is recognized. For this an empty <option> is included
             $numPerfBoards=$board->getBoards();
-            $numAvailBoards=$boardAvaiable->getBoards();
+            $numAvailBoards=$boardAvailable->getBoards();
             if ((intval(count($numPerfBoards))+intval(count($numAvailBoards)))== 1){
             	echo "<option value=\"\"></option>";
             }
@@ -143,8 +128,8 @@ if ((isset($_GET["board"]))&&($_GET['board'] != "")) {
             </td></tr>
         </table>
         </td>
-        <td style="vertical-align:middle;" title="Availability Report Timeperiod: Host: '<? echo $DB_timeperiodHost; ?>' | Service: '<? echo $DB_timeperiodService; ?>'">
-            <? if ((isset($selectedBoard)) && ($selectedBoard != "")){ ?><font size="3px">Type:&nbsp;<b><?= $board->contains($selectedBoard) ? "performance" : "availability" ?></b></font> <? } ?>
+        <td style="vertical-align:middle;" title="Availability Report Timeperiod: Host: '<?php echo $DB_timeperiodHost; ?>' | Service: '<?php echo $DB_timeperiodService; ?>'">
+            <?php if ((isset($selectedBoard)) && ($selectedBoard != "")){ ?><font size="3px">Type:&nbsp;<b><?php $board->contains($selectedBoard) ? "performance" : "availability" ?></b></font> <?php } ?>
         </td>
         <td align="right">
             <table width="300" align="right"><tr><td align="right">

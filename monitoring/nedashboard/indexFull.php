@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<?php /*
+<?php
+/*
 -------------------------------------------------------------------------
 Dashboard - Nagios Tachos Dashboard
 Copyright (C) 2009 by WUERTHPHOENIX Srl.
@@ -26,10 +27,9 @@ http://www.wuerth-phoenix.com
  --------------------------------------------------------------------------
 */ 
 require_once './includes/config.php.inc';
-include 'dataSources/avaiability/class.boardDAO.php';
+include 'dataSources/availability/class.boardDAO.php';
 include 'dataSources/performance/class.boardDAO.php';
 ?>
-
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="./css/dynButtons.css" />
@@ -56,14 +56,14 @@ include 'dataSources/performance/class.boardDAO.php';
                 var board=document.boardSelection.board;
                 board.selectedIndex=(board.selectedIndex+1)%board.options.length;
                 document.boardSelection.submit();
-                setTimeout('zeit();', <?=$DB_diashowRefreshTime*1000?>);
+                setTimeout('zeit();', <?php=$DB_diashowRefreshTime*1000?>);
             }
         </script>
     </head>
-    <body bgcolor="#c3c7d3" onload="setTimeout('zeit();', <?=$DB_diashowRefreshTime*1000?>);" ondblclick="window.close();">
+    <body bgcolor="#c3c7d3" onload="setTimeout('zeit();', <?php=$DB_diashowRefreshTime*1000?>);" ondblclick="window.close();">
         <?php
         $board = new boardDAO();
-        $boardAvaiable=new boardDAOAvaiable();
+        $boardAvailable=new boardDAOAvailable();
 
         $selectedBoard=null;
         if ((isset($_GET["board"]))&&($_GET['board'] != "")) {
@@ -76,7 +76,7 @@ include 'dataSources/performance/class.boardDAO.php';
         	if (count($allBoards)>0) {
         		$selectedBoard = $allBoards[0];
         	} else {
-        		$allBoards =$boardAvaiable->getBoards();
+        		$allBoards =$boardAvailable->getBoards();
         		if (count($allBoards)>0) {
         			$selectedBoard = $allBoards[0];
         		}
@@ -85,7 +85,7 @@ include 'dataSources/performance/class.boardDAO.php';
         ?>
         <table>
         <tr><td>
-<table style="background-image:url(images/header.png); height: 25px;" height="10" border="0" width="<? echo $DB_formwidth; ?>px" cellspacing="0" cellpadding="2">
+<table style="background-image:url(images/header.png); height: 25px;" height="10" border="0" width="<?php echo $DB_formwidth; ?>px" cellspacing="0" cellpadding="2">
 	<tr>
         <td style="width: 250px">
            <?php
@@ -96,7 +96,7 @@ include 'dataSources/performance/class.boardDAO.php';
                 $select = $selectedBoard==$board_id?"selected":"";
                 echo "<option value='".$board_id."' ".$select.">".$board_id."</option>\n";
             }
-            $boards=$boardAvaiable->getBoards();
+            $boards=$boardAvailable->getBoards();
             foreach ($boards as $board_id) {
                 $select = $selectedBoard==$board_id?"selected":"";
                 echo "<option value='".$board_id."' ".$select.">".$board_id."</option>\n";
@@ -106,10 +106,10 @@ include 'dataSources/performance/class.boardDAO.php';
             ?>
         </td>
         <td valign="top">
-            <? if ((isset($selectedBoard)) && ($selectedBoard != "")){ 
-            ?><font size="3px">Type:&nbsp;<b><?= $board->contains($selectedBoard) ? "performance" : "avaiability" ?></b></font><? } ?>
+            <?php if ((isset($selectedBoard)) && ($selectedBoard != "")){ 
+            ?><font size="3px">Type:&nbsp;<b><?php= $board->contains($selectedBoard) ?php "performance" : "availability" ?></b></font><?php } ?>
         </td>
-        <? if ($board->contains($selectedBoard)){
+        <?php if ($board->contains($selectedBoard)){
         	echo "<td align=\"right\">";
         } else {
         	echo "<td align=\"right\" title=\"Availability Report Timeperiod: <Timeperiod host> | < Timeperiod Service>\">
@@ -124,15 +124,12 @@ include 'dataSources/performance/class.boardDAO.php';
 <img width="180px" src="images/neteye_480.jpg">
 </td></tr>
 </table>
-<?
-
-        
-
+<?php
         if ($board->contains($selectedBoard)) {
             include 'dashBoard.php';
         } else {
-            include 'dashBoardAvaiable.php';
+            include 'dashBoardAvailable.php';
         }
-        ?>
+?>
     </body>
 </html>

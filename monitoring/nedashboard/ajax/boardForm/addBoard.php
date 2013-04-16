@@ -1,6 +1,6 @@
 <?php
 include_once("../../dataSources/performance/class.boardDAO.php");
-include_once("../../dataSources/avaiability/class.boardDAO.php");
+include_once("../../dataSources/availability/class.boardDAO.php");
 include_once("../../layout/class.layoutDAO.php");
 require_once(dirname(__FILE__).'/../../includes/config.NetEye.php.inc');
 ?>
@@ -37,7 +37,7 @@ if (empty($action)) {
                   <td>
                     <select name='type'>
                         <option value='tService'>performance</option>
-                        <option value='tAvaiability'>availability</option>
+                        <option value='tAvailability'>availability</option>
                     </select>
                   </td>
                   </tr>
@@ -59,7 +59,7 @@ else if ($action == 'send') {
         if (isset($_REQUEST['type']) && $_REQUEST['type']=="tService") {
             $board = new boardDAO();
         } else {
-            $board = new boardDAOAvaiable();
+            $board = new boardDAOAvailable();
         }
         $board->addBoard($_REQUEST['name']);
         $board->persist();

@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<?php /*
+<?php
+/*
 -------------------------------------------------------------------------
 Dashboard - Nagios Tachos Dashboard
 Copyright (C) 2009 by WUERTHPHOENIX Srl.
@@ -26,25 +27,23 @@ http://www.wuerth-phoenix.com
  --------------------------------------------------------------------------
 */ 
 include 'includes/version.php.inc'; ?>
-
 <html>
     <head>
-        <title>NetEye Dashboard v. <? echo $version; ?></title>
+        <title>NetEye Dashboard v. <?php echo $version; ?></title>
         <link rel="stylesheet" type="text/css" href="./css/main.css" />
     </head>
     <body bgcolor="#c3c7d3">
-        <?php
+    <?php
         $whereIam="configuration";
         include 'includes/header.php';
-        ?>
-        <?
+
         if ($selectedBoard != ""){
         	if ($board->contains($selectedBoard)) {
         		include 'configService.php';
         	} else {
-        		include 'configAvaiability.php';
+        		include 'configAvailability.php';
         	}
         }
-        ?>
+    ?>
     </body>
 </html>

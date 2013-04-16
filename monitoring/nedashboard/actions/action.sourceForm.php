@@ -37,7 +37,7 @@ $element->persist();
 //if ($_GET["action"] != -1) {
 
 //print selection for html select filled with AJAX
-$avaiability = new configSourceDAO($_GET["host"]."/".$_GET["service"]);
+$availability = new configSourceDAO($_GET["host"]."/".$_GET["service"]);
 $sSourceNames=array();
 $sSourceLabels=array();
 $aSourceNames=array();
@@ -47,8 +47,8 @@ foreach ($source->getSources() as $sourceId) {
     $sSourceNames[]=$source->getName($sourceId);
     $sSourceLabels[]=$source->getDetails($source->getName($sourceId))->getLabel();
 }
-foreach ($avaiability->getElements() as $sourceName) {
-    //get all servicenames avaiable
+foreach ($availability->getElements() as $sourceName) {
+    //get all servicenames available
     if (!$source->contains($sourceName)) {
         //if they are not contained in selected sourceNames
         $aSourceNames[]=$sourceName;

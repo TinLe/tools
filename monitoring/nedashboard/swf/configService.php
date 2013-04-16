@@ -27,7 +27,7 @@
 </table>
 
 <form name="hostForm" method="get">
-    <input type="hidden" name="board_id" value="<?=$_GET["board_id"]?>"/>
+    <input type="hidden" name="board_id" value="<?php=$_GET["board_id"]?>"/>
     <label>select Host:</label>
     <select name="selected_host" onchange="document.hostForm.submit();">
     <?php
@@ -58,13 +58,13 @@
         $selected="selected";
     }
     ?>
-    <option value="new" <?=$selected?> >--new Host--</option>
+    <option value="new" <?php=$selected?> >--new Host--</option>
     </select>
 </form>
 
 <form name="serviceForm" method="get">
-    <input type="hidden" name="board_id" value="<?=$board_id?>"/>
-    <input type="hidden" name="selected_host" value="<?=$selected_host?>"/>
+    <input type="hidden" name="board_id" value="<?php=$board_id?>"/>
+    <input type="hidden" name="selected_host" value="<?php=$selected_host?>"/>
     <label>select Service:</label>
     <select name="selected_service" onchange="document.serviceForm.submit();">
     <?php      
@@ -104,41 +104,41 @@
     $selected="selected";
     }
     ?>
-    <option value="new" <?=$selected?> >--new Service--</option>
+    <option value="new" <?php=$selected?> >--new Service--</option>
     </select>
 </form>
 
 <form name="configForm" action="configAction.php">
-<input type="hidden" name="board_id" value="<?=$board_id?>"/>
+<input type="hidden" name="board_id" value="<?php=$board_id?>"/>
 <label>hostName:</label>
-<input type="text" name="host" value="<?=$currentHost["host"]?>" />
+<input type="text" name="host" value="<?php=$currentHost["host"]?>" />
 <p>
 <label>serviceName:</label>
-<input type="text" name="service" value="<?=$currentService["name"]?>" />
+<input type="text" name="service" value="<?php=$currentService["name"]?>" />
 <p>
 <label>source:</label>
-<input type="text" name="source" value="<?=$currentService["source"]?>" />
+<input type="text" name="source" value="<?php=$currentService["source"]?>" />
 <p>
 <label>min:</label>
-<input type="text" name="min" value="<?=$currentService["min"]?>" />
+<input type="text" name="min" value="<?php=$currentService["min"]?>" />
 <p>
 <label>max:</label>
-<input type="text" name="max" value="<?=$currentService["max"]?>" />
+<input type="text" name="max" value="<?php=$currentService["max"]?>" />
 <p>
 <label>unit:</label>
-<input type="text" name="unit" value="<?=$currentService["unit"]?>" />
+<input type="text" name="unit" value="<?php=$currentService["unit"]?>" />
 <p>
 <label>step:</label>
-<input type="text" name="step" value="<?=$currentService["step"]?>" />
+<input type="text" name="step" value="<?php=$currentService["step"]?>" />
 <p>
 <label>ds:</label>
-<input type="text" name="ds" value="<?=$currentService["ds"]?>" />
+<input type="text" name="ds" value="<?php=$currentService["ds"]?>" />
 <p>
 <label>critical:</label>
-<input type="text" name="critical" value="<?=$currentService["critical"]?>" />
+<input type="text" name="critical" value="<?php=$currentService["critical"]?>" />
 <p>
 <label>warning:</label>
-<input type="text" name="warning" value="<?=$currentService["warning"]?>" />
+<input type="text" name="warning" value="<?php=$currentService["warning"]?>" />
 <p>
 
 <a href="javascript:document.configForm.submit();" class="button" style="width:100;"><span>Submit</span></a>

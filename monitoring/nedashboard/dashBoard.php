@@ -37,7 +37,11 @@ if ($selectedBoard!=null) {
     $speedometer->includeScript();
 
     echo("<table width=$DB_formwidth px>");
-    $width=$DB_formwidth/$DB_tachosInRow;
+    if ($DB_tachosInRow != 0) {
+        $width = $DB_formwidth/$DB_tachosInRow;
+    } else {
+        $width = 0;
+    }
     echo "<tr><td width=".$width."px></td><td width=".$width."px></td><td width=".$width."px></td><td width=".$width."px></td><td width=".$width."px></td></tr>";
     $pos=0;
     //Define tachos per row from config File
