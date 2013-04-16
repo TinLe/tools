@@ -1,4 +1,5 @@
-<?php /*
+<?php
+/*
 -------------------------------------------------------------------------
 Dashboard - Nagios Tachos Dashboard
 Copyright (C) 2009 by WUERTHPHOENIX Srl.
@@ -24,13 +25,12 @@ http://www.wuerth-phoenix.com
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  --------------------------------------------------------------------------
 */ 
-include_once('./dataSources/avaiability/class.boardDAO.php');
-include_once('./dataSources/avaiability/class.dataDAO.php');
+include_once('./dataSources/availability/class.boardDAO.php');
+include_once('./dataSources/availability/class.dataDAO.php');
 include_once('./layout/class.layoutDAO.php');
 include_once('./layout/class.elementDAO.php');
 
 include_once 'speedometer/class.speedometer.php';
-
 
 if ($selectedBoard!=null) {
     $element= new elementDAO($selectedBoard);
@@ -48,7 +48,7 @@ if ($selectedBoard!=null) {
         if ($pos==0) {
             echo "<tr>";
         }
-        if (stripos($e["type"],"Avaiability")!==false) {
+        if (stripos($e["type"],"Availability")!==false) {
             $pos++;
             echo "<td>";
             $tachoId=$selectedBoard.".".$e["name"];
@@ -56,8 +56,8 @@ if ($selectedBoard!=null) {
             $dataDAO = new dataDAO($selectedBoard);
             $dataDAO->loadFile($selectedBoard);
             $hostName = $dataDAO->getName($tachoId);
-            //$meter = new meter($hostName, 0,100,$dataDAO->getName($tachoId),"",150,151,$DB_avaiability,"",$dataDAO->getType($tachoId));
-            $meter = new meter($hostName, 0,100,substr($dataDAO->getName($tachoId),0,13),"",150,151,$DB_avaiability,"",$dataDAO->getType($tachoId));
+            //$meter = new meter($hostName, 0,100,$dataDAO->getName($tachoId),"",150,151,$DB_availability,"",$dataDAO->getType($tachoId));
+            $meter = new meter($hostName, 0,100,substr($dataDAO->getName($tachoId),0,13),"",150,151,$DB_availability,"",$dataDAO->getType($tachoId));
           
             echo $speedometer->createMeter($meter);
             echo "<table align=\"center\" cellpadding=\"0\"><tr><td height=\"5\"><a style=\"padding-left:4px;\" href=\"#\" class=\"button_disabled\">";

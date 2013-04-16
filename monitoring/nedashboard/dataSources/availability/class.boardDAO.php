@@ -1,5 +1,5 @@
 <?php
-    class boardDAOAvaiable {
+    class boardDAOAvailable {
         var $xmlDom;
         var $dash_id="root";
 
@@ -8,7 +8,7 @@
             return dirname($rc->getFileName())."/config.xml";
         }
     
-        function boardDAOAvaiable() {
+        function boardDAOAvailable() {
             $this->xmlDom=new DOMDocument();
             $this->xmlDom->formatOutput=true;
             $this->xmlDom->load($this->getConfigFile());

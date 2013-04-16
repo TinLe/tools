@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (c) 2003 Jose Solorzano.  All rights reserved.
  * Redistribution of source must retain this copyright notice.
@@ -343,5 +342,4 @@ class HtmlParser {
         return $retvalue;
     }
 }
-
 ?>

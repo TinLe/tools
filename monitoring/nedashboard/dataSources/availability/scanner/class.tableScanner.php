@@ -1,5 +1,4 @@
 <?php
-
 include_once (dirname(__FILE__)."/../parser/class.parserFactory.php");
 
 /*

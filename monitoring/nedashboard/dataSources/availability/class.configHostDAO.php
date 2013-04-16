@@ -5,7 +5,7 @@ include_once(dirname(__FILE__)."/../../includes/config.NetEye.php.inc");
 include_once(dirname(__FILE__)."/../performance/class.globalSettingsDAO.php");
 
 
-class configHostDAOAvaiable extends configDAO {
+class configHostDAOAvailable extends configDAO {
 	
 	var $DB_timeperiodHost = "last7days";
 	var $DB_availCGIUser = "guest:guest";

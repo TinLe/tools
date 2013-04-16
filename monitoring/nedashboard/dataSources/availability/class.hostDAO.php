@@ -2,10 +2,10 @@
 
 include_once 'class.dataDAO.php';
 
-class hostDAOAvaiable extends dataDAO {
+class hostDAOAvailable extends dataDAO {
 
 
-function hostDAOAvaiable($dash_id) {
+function hostDAOAvailable($dash_id) {
         $this->dash_id=$dash_id;
         $this->loadFile($dash_id);
     }
