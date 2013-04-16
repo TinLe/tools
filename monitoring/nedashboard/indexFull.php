@@ -35,7 +35,6 @@ include 'dataSources/performance/class.boardDAO.php';
         <link rel="stylesheet" type="text/css" href="./css/dynButtons.css" />
         <link rel="stylesheet" type="text/css" href="./css/main.css" />
         <title>The NetEye Dashboard Monitor</title>
-
         <style>
             div.titleheader {
                 font-size:22px;
@@ -56,11 +55,11 @@ include 'dataSources/performance/class.boardDAO.php';
                 var board=document.boardSelection.board;
                 board.selectedIndex=(board.selectedIndex+1)%board.options.length;
                 document.boardSelection.submit();
-                setTimeout('zeit();', <?php=$DB_diashowRefreshTime*1000?>);
+                setTimeout('zeit();', <?php $DB_diashowRefreshTime*1000?>);
             }
         </script>
     </head>
-    <body bgcolor="#c3c7d3" onload="setTimeout('zeit();', <?php=$DB_diashowRefreshTime*1000?>);" ondblclick="window.close();">
+    <body bgcolor="#c3c7d3" onload="setTimeout('zeit();', <?php $DB_diashowRefreshTime*1000?>);" ondblclick="window.close();">
         <?php
         $board = new boardDAO();
         $boardAvailable=new boardDAOAvailable();
@@ -107,7 +106,7 @@ include 'dataSources/performance/class.boardDAO.php';
         </td>
         <td valign="top">
             <?php if ((isset($selectedBoard)) && ($selectedBoard != "")){ 
-            ?><font size="3px">Type:&nbsp;<b><?php= $board->contains($selectedBoard) ?php "performance" : "availability" ?></b></font><?php } ?>
+            ?><font size="3px">Type:&nbsp;<b><?php $board->contains($selectedBoard) ? "performance" : "availability" ?></b></font><?php } ?>
         </td>
         <?php if ($board->contains($selectedBoard)){
         	echo "<td align=\"right\">";
