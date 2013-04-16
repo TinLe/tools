@@ -1,0 +1,18 @@
+/*
+ * SimpleModal Contact Form
+ * http://www.ericmmartin.com/projects/simplemodal/
+ * http://code.google.com/p/simplemodal/
+ *
+ * Copyright (c) 2008 Eric Martin - http://ericmmartin.com
+ *
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Revision: $Id: contact_ie.css,v 1.1 2009/03/02 10:11:38 pb00162 Exp $
+ *
+ */
+
+/* IE 6 hacks*/
+#contact-container {top:expression((document.documentElement.scrollTop || document.body.scrollTop) + Math.round(15 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100) + 'px');}
+#contact-container .contact-top {background:url(../img/contact/form_top_ie.gif) no-repeat;}
+#contact-container form {padding:0; margin:0;}

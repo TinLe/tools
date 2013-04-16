@@ -1,0 +1,109 @@
+/**************************************************************
+This is a css file to create the acqua style buttons used in
+wuerth phoenix neteye.
+
+Version: 1.0.0
+Since: 29.08.2008
+Author: Marmsoler Diego
+
+How-to:
+Copy and pased the below code fragment to insert a button
+into your html page:
+
+<!---------------------------Button-------------------------->
+<!--active button-->
+<a href="destination" class="button"><span>Label</span></a>
+<!--not active button-->
+<a href="destination" class="button_disabled"><span>Label</span></a>
+<!---------------------------Button-------------------------->
+
+
+Note:
+Ensure the avaiability of the following image files:
+	../images/button1.png
+	../images/button2.png
+	../images/button_notactive1.png
+	../images/button_notactive2.png
+
+**************************************************************/
+
+.clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+
+/* ---------------------ENABLED BUTTON----------------------- */
+a.button {
+    cursor:default; 
+    background: transparent url('../images/button2.png') no-repeat scroll top right;
+    display: block;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 6px;
+    padding-right: 36px; /* sliding doors padding */
+    text-decoration: none;
+    text-align:center;
+    outline: none; /* hide dotted outline in Firefox */
+}
+
+a.button span {
+    background: transparent url('../images/button1.png') no-repeat;
+    color: #4A4A7B;
+    display: block;
+    height:40px;
+    line-height: 20px;
+    padding-left: 15px;
+}
+
+a.button:hover {
+    background-position:right -75px;border:0px;
+    color: #000;
+}
+
+a.button:hover span {
+    background-position:left -75px;border:0px;
+    line-height: 25px;
+    padding-left: 15px;
+}
+
+a.button:active {
+    background: transparent url('../images/button2.png') no-repeat scroll top right;
+    background-position:right -150px;border:0px;
+    outline: none; /* hide dotted outline in Firefox */
+}
+
+a.button:active span {
+    background: transparent url('../images/button1.png') no-repeat;
+    background-position:left -150px;border:0px;
+}
+
+/* ---------------------ENABLED BUTTON----------------------- */
+
+/* ---------------------DISABLED BUTTON----------------------- */
+a.button_disabled {
+    border:0px;
+    cursor:default; 
+    background: transparent url('../images/button_notactive2.png') no-repeat scroll top right;
+    display: block;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    height: 40px;
+    margin-left: 6px;
+    padding-right: 29px; /* sliding doors padding */
+    text-decoration: none;
+    outline: none; /* hide dotted outline in Firefox */
+    text-align:center;
+}
+
+a.button_disabled span {
+    background: transparent url('../images/button_notactive1.png') no-repeat;
+    color: #666666;
+    display: block;
+    height:50px;
+    line-height: 25px;
+    padding-left: 15px;
+}
+
+/* ---------------------DISABLED BUTTON----------------------- */

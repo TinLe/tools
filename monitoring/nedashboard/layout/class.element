@@ -1,0 +1,36 @@
+<?php
+include_once 'class.space.element';
+include_once 'class.title.element';
+include_once 'class.image.element';
+include_once 'class.tacho.element';
+
+abstract class element{
+    static function getDelimiter() {
+        return ".";
+    }
+    static function getTitleDelimiter() {
+        return "__";
+    }
+
+    function createJSIdFunction(){
+        $str="function create".$this->getType()."Id(id) {\n";
+        $str.="return '".$this->getType()."'+id;\n";
+        $str.="}\n";
+
+        return $str;
+    }
+
+    abstract function getType();
+
+    function element() {
+    }
+
+    function createJSFunction(){
+
+    }
+
+    function createHTML() {
+    }
+}
+
+?>
