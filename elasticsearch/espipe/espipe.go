@@ -3,7 +3,8 @@
 // 
 // This requires the elastic go library from https://github.com/olivere/elastic
 //
-// tin@le.org  http://blog.tinle.org
+// Copyright 2015 (c) tin@le.org  http://blog.tinle.org
+// Disclaimer: Use at your own risks.  This is free, open source. GPL.
 //
 // This is a specific use case similar to using logstash and following config:
 // logstash {
@@ -26,6 +27,7 @@ var (
       sidx = flag.String("sidx", "logstash*", "Source index(es) to copy (default to all '*')")
       tidx = flag.String("tidx", "copyidx", "Target index to copy (default to 'copyidx')")
       bulksize = flag.Int("bulksize", 500, "Number of docs to send to ES per chunk (default to 500)")
+      progressflg = flag.Bool("progressflg", true, "Display progress (default to True)")
 )
 
 func Reindex(src, dst string, bsize int, sourceIndexName, targetIndexName string) (count int, err error) {
@@ -49,11 +51,9 @@ func Reindex(src, dst string, bsize int, sourceIndexName, targetIndexName string
     fmt.Printf("Unable to get count of soure index (%s), err: %s", sourceIndexName, err)
   }
 
-  totalsOk := true
   t0 := time.Now()
   progress := func(current, total int64) {
-    totalsOk = totalsOk && total == sourceCount
-    if (current % 100000 == 0) {
+    if (current % 100000 == 0 && *progressflg) {
       t1 := time.Now()
       fmt.Printf("time: %v, current: %d (%d)\n", t1.Sub(t0), current, total)
       t0 = time.Now()
