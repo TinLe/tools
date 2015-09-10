@@ -45,7 +45,7 @@ def main():
 
     global args
     parser = ArgumentParser(description=description)
-    parser.add_argument('-H', '--host', default='wwwdev-a-1.qts.melodis.com',
+    parser.add_argument('-H', '--host', default='wwwdev-a-1.qts',
       help="mongodb host, e.g. 'api.foo.com' default to 'localhost' if not specified")
     parser.add_argument('-P', '--port', type=int, default=8098,
       help="riak port if not the default 8098")
@@ -53,8 +53,8 @@ def main():
       help="database (default is all)")
     args = parser.parse_args()
 
-    client = riak.RiakClient(host='wwwdev-a-1.qts.melodis.com', port=8098)
-    bucket = client.bucket('restaurants')
+    client = riak.RiakClient(host='wwwdev-a-1.qts', port=8098)
+    bucket = client.bucket('myBucket')
     mykeys = bucket.get_keys()
     print "Number of keys: %d" % (len(mykeys))
 
