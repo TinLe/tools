@@ -22,12 +22,13 @@ import (
 )
 
 var (
-      src = flag.String("src", "http://localhost:9200", "Source ES cluster (default to http://localhost:9200)")
-      dst = flag.String("dst", "http://localhost:9200", "Destination ES cluster (default to http://localhost:9200)")
-      sidx = flag.String("sidx", "logstash*", "Source index(es) to copy (default to all '*')")
-      tidx = flag.String("tidx", "copyidx", "Target index to copy (default to 'copyidx')")
-      bulksize = flag.Int("bulksize", 500, "Number of docs to send to ES per chunk (default to 500)")
-      progressflg = flag.Bool("progressflg", true, "Display progress (default to True)")
+      help = flag.String("help", "", "Print out this usage message")
+      src = flag.String("src", "http://localhost:9200", "Source ES cluster")
+      dst = flag.String("dst", "http://localhost:9200", "Destination ES cluster")
+      sidx = flag.String("sidx", "*", "Source index(es) to copy")
+      tidx = flag.String("tidx", "copyidx", "Target index to copy")
+      bulksize = flag.Int("bulksize", 500, "Number of docs to send to ES per chunk")
+      progressflg = flag.Bool("progressflg", true, "Display progress")
 )
 
 func Reindex(src, dst string, bsize int, sourceIndexName, targetIndexName string) (count int, err error) {
@@ -51,9 +52,17 @@ func Reindex(src, dst string, bsize int, sourceIndexName, targetIndexName string
     fmt.Printf("Unable to get count of soure index (%s), err: %s", sourceIndexName, err)
   }
 
+  tick := int64(100000)
+  if (*progressflg) {
+    fmt.Printf("sourceCount (%d)", sourceCount)
+    if (sourceCount < 1000000) {
+      tick = (sourceCount % 10)
+    }
+  }
   t0 := time.Now()
   progress := func(current, total int64) {
-    if (current % 100000 == 0 && *progressflg) {
+    // if (current % 100000 == 0 && *progressflg) {
+    if (current % tick == 0 && *progressflg) {
       t1 := time.Now()
       fmt.Printf("time: %v, current: %d (%d)\n", t1.Sub(t0), current, total)
       t0 = time.Now()
@@ -78,6 +87,10 @@ func Reindex(src, dst string, bsize int, sourceIndexName, targetIndexName string
 
 func main() {
   flag.Parse()
+  if (*sidx == "*") {
+    flag.PrintDefaults()
+    return
+  }
   fmt.Println(Reindex(*src, *dst, *bulksize, *sidx, *tidx))
 }
 
