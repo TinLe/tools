@@ -22,23 +22,24 @@ import (
 )
 
 var (
-	help        = flag.String("help", "", "Print out this usage message")
-	src         = flag.String("src", "http://localhost:9200", "Source ES cluster")
-	dst         = flag.String("dst", "http://localhost:9200", "Destination ES cluster")
-	sidx        = flag.String("sidx", "*", "Source index(es) to copy")
-	tidx        = flag.String("tidx", "copyidx", "Target index to copy")
-	bulksize    = flag.Int("bulksize", 500, "Number of docs to send to ES per chunk")
-	retries     = flag.Int("retries", 3, "Number of retries 'action' before we return error")
-	action      = flag.String("action", "reindex", "Action to perform: reindex, copy")
-	progressflg = flag.Bool("progressflg", true, "Display progress")
+	ProgramVersion = "\n\nespipe v1.0.0\n"
+	help           = flag.String("help", "", "Print out this usage message")
+	src            = flag.String("src", "http://localhost:9200", "Source ES cluster")
+	dst            = flag.String("dst", "http://localhost:9200", "Destination ES cluster")
+	sidx           = flag.String("sidx", "*", "Source index(es) to copy")
+	tidx           = flag.String("tidx", "copyidx", "Target index to copy")
+	bulksize       = flag.Int("bulksize", 500, "Number of docs to send to ES per chunk")
+	retries        = flag.Int("retries", 3, "Number of retries 'action' before we return error")
+	action         = flag.String("action", "reindex", "Action to perform: reindex, copy")
+	progressflg    = flag.Bool("progressflg", true, "Display progress")
 )
 
 func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexName string) (count int, err error) {
 	// Create a src client
 	sourceClient, err := elastic.NewClient(
-    elastic.SetURL(src),
-    elastic.SetSniff(false),
-    elastic.SetMaxRetries(retries))
+		elastic.SetURL(src),
+		elastic.SetSniff(false),
+		elastic.SetMaxRetries(retries))
 	if err != nil {
 		// Handle error
 		fmt.Printf("Unable to connect to src: %s, err: %s", src, err)
@@ -46,9 +47,9 @@ func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexNa
 
 	// Create a dst client
 	targetClient, err := elastic.NewClient(
-    elastic.SetURL(dst),
-    elastic.SetSniff(false),
-    elastic.SetMaxRetries(retries))
+		elastic.SetURL(dst),
+		elastic.SetSniff(false),
+		elastic.SetMaxRetries(retries))
 	if err != nil {
 		// Handle error
 		fmt.Printf("Unable to connect to dst: %s, err: %s", dst, err)
@@ -94,7 +95,9 @@ func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexNa
 func main() {
 	flag.Parse()
 	if *sidx == "*" {
+		fmt.Printf("%s\n", ProgramVersion)
 		flag.PrintDefaults()
+		fmt.Printf("\n\n")
 		return
 	}
 	fmt.Println(Reindex(*src, *dst, *bulksize, *retries, *sidx, *tidx))
