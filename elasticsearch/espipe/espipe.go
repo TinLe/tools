@@ -17,7 +17,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/TinLe/elastic"
+	"gopkg.in/olivere/elastic.v2"
 	"time"
 )
 
@@ -37,6 +37,7 @@ func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexNa
 	// Create a src client
 	sourceClient, err := elastic.NewClient(
     elastic.SetURL(src),
+    elastic.SetSniff(false),
     elastic.SetMaxRetries(retries))
 	if err != nil {
 		// Handle error
@@ -46,6 +47,7 @@ func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexNa
 	// Create a dst client
 	targetClient, err := elastic.NewClient(
     elastic.SetURL(dst),
+    elastic.SetSniff(false),
     elastic.SetMaxRetries(retries))
 	if err != nil {
 		// Handle error
@@ -60,7 +62,7 @@ func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexNa
 
 	tick := int64(100000)
 	if *progressflg {
-		fmt.Printf("sourceCount (%d)", sourceCount)
+		fmt.Printf("sourceCount (%d)\n", sourceCount)
 		if sourceCount < 1000000 {
 			tick = (sourceCount % 10)
 		}
