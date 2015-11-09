@@ -31,7 +31,7 @@ var (
 	bulksize       = flag.Int("bulksize", 500, "Number of docs to send to ES per chunk")
 	retries        = flag.Int("retries", 3, "Number of retries 'action' before we return error")
 	action         = flag.String("action", "reindex", "Action to perform: reindex, copy")
-	progressflg    = flag.Bool("progressflg", true, "Display progress")
+	progressflg    = flag.Bool("progressflg", false, "Display progress")
 )
 
 func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexName string) (count int, err error) {
@@ -65,7 +65,7 @@ func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexNa
 	if *progressflg {
 		fmt.Printf("sourceCount (%d)\n", sourceCount)
 		if sourceCount < 1000000 {
-			tick = (sourceCount % 10)
+			tick = (sourceCount % 100000)
 		}
 	}
 	t0 := time.Now()
@@ -100,5 +100,5 @@ func main() {
 		fmt.Printf("\n\n")
 		return
 	}
-	fmt.Println(Reindex(*src, *dst, *bulksize, *retries, *sidx, *tidx))
+	Reindex(*src, *dst, *bulksize, *retries, *sidx, *tidx)
 }
