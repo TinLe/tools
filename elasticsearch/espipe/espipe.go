@@ -84,7 +84,7 @@ func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexNa
 	ret, err := r.Do()
 	if err != nil {
 		//t.Fatal(err)
-		fmt.Printf("Error while CopyToTargetIndex(ret: %, err: %s)", ret, err)
+		fmt.Printf("Error while CopyToTargetIndex(ret: %d, err: %s)", ret, err)
 	}
 	endTime := time.Now()
 	fmt.Printf("Start: %v\nEnd: %v\nSourceCount: %d\n", startTime, endTime, sourceCount)
@@ -100,5 +100,9 @@ func main() {
 		fmt.Printf("\n\n")
 		return
 	}
-	Reindex(*src, *dst, *bulksize, *retries, *sidx, *tidx)
+	ret, err := Reindex(*src, *dst, *bulksize, *retries, *sidx, *tidx)
+	if err != nil {
+		//t.Fatal(err)
+		fmt.Printf("Error while Reindexing: ret: %d, err: %s)", ret, err)
+	}
 }
