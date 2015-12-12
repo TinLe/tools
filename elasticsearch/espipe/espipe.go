@@ -18,6 +18,7 @@ import (
 	"flag"
 	"fmt"
 	"gopkg.in/olivere/elastic.v2"
+	"strings"
 	"time"
 )
 
@@ -32,6 +33,7 @@ var (
 	retries        = flag.Int("retries", 3, "Number of retries 'action' before we return error")
 	action         = flag.String("action", "reindex", "Action to perform: reindex, copy")
 	progressflg    = flag.Bool("progressflg", false, "Display progress")
+	debug          = flag.Bool("debug", false, "Display debugging messages")
 )
 
 func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexName string) (count int, err error) {
@@ -100,6 +102,20 @@ func main() {
 		fmt.Printf("\n\n")
 		return
 	}
+    if strings.HasPrefix(*src, "http://") != true {
+        s := []string{"http:", *src}
+        *src = strings.Join(s, "//")
+    }
+    if strings.HasPrefix(*dst, "http://") != true {
+        s := []string{"http:", *dst}
+        *dst = strings.Join(s, "//")
+    }
+    if *debug {
+        fmt.Printf("\n\nDebug output.....\n")
+        fmt.Printf("Source Elasticsearch = %s\nDestination Elasticsearch = %s\n", *src, *dst)
+        fmt.Printf("Source Index = %s\nDestination Index = %s\n", *sidx, *tidx)
+        fmt.Printf("How many Retries = %d\nBulk index size = %d\n\n", *retries, *bulksize)
+    }
 	ret, err := Reindex(*src, *dst, *bulksize, *retries, *sidx, *tidx)
 	if err != nil {
 		//t.Fatal(err)
