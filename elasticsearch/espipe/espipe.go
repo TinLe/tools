@@ -22,8 +22,8 @@ import (
 )
 
 var (
-	ProgramVersion = "\n\nespipe v1.0.0\n"
-	help           = flag.String("help", "", "Print out this usage message")
+	ProgramVersion = "espipe v1.0.0\n"
+	version        = flag.Bool("version", false, ProgramVersion)
 	src            = flag.String("src", "http://localhost:9200", "Source ES cluster")
 	dst            = flag.String("dst", "http://localhost:9200", "Destination ES cluster")
 	sidx           = flag.String("sidx", "*", "Source index(es) to copy")
@@ -95,7 +95,7 @@ func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexNa
 func main() {
 	flag.Parse()
 	if *sidx == "*" {
-		fmt.Printf("%s\n", ProgramVersion)
+		fmt.Printf("\n\n%s\n", ProgramVersion)
 		flag.PrintDefaults()
 		fmt.Printf("\n\n")
 		return
