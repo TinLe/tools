@@ -31,7 +31,6 @@ var (
 	tidx           = flag.String("tidx", "copyidx", "Target index to copy")
 	bulksize       = flag.Int("bulksize", 500, "Number of docs to send to ES per chunk")
 	retries        = flag.Int("retries", 3, "Number of retries 'action' before we return error")
-	action         = flag.String("action", "reindex", "Action to perform: reindex, copy")
 	progressflg    = flag.Bool("progressflg", false, "Display progress")
 	debug          = flag.Bool("debug", false, "Display debugging messages")
 )
@@ -60,7 +59,7 @@ func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexNa
 	// setup progress function
 	sourceCount, err := sourceClient.Count(sourceIndexName).Do()
 	if err != nil {
-		fmt.Printf("Unable to get count of soure index (%s), err: %s", sourceIndexName, err)
+		fmt.Printf("Unable to get count of source index (%s), err: %s", sourceIndexName, err)
 	}
 
 	tick := int64(100000)
