@@ -101,20 +101,20 @@ func main() {
 		fmt.Printf("\n\n")
 		return
 	}
-    if strings.HasPrefix(*src, "http://") != true {
-        s := []string{"http:", *src}
-        *src = strings.Join(s, "//")
-    }
-    if strings.HasPrefix(*dst, "http://") != true {
-        s := []string{"http:", *dst}
-        *dst = strings.Join(s, "//")
-    }
-    if *debug {
-        fmt.Printf("\n\nDebug output.....\n")
-        fmt.Printf("Source Elasticsearch = %s\nDestination Elasticsearch = %s\n", *src, *dst)
-        fmt.Printf("Source Index = %s\nDestination Index = %s\n", *sidx, *tidx)
-        fmt.Printf("How many Retries = %d\nBulk index size = %d\n\n", *retries, *bulksize)
-    }
+	if strings.HasPrefix(*src, "http://") != true {
+		s := []string{"http:", *src}
+		*src = strings.Join(s, "//")
+	}
+	if strings.HasPrefix(*dst, "http://") != true {
+		s := []string{"http:", *dst}
+		*dst = strings.Join(s, "//")
+	}
+	if *debug {
+		fmt.Printf("\n\nDebug output.....\n")
+		fmt.Printf("Source Elasticsearch = %s\nDestination Elasticsearch = %s\n", *src, *dst)
+		fmt.Printf("Source Index = %s\nDestination Index = %s\n", *sidx, *tidx)
+		fmt.Printf("How many Retries = %d\nBulk index size = %d\n\n", *retries, *bulksize)
+	}
 	ret, err := Reindex(*src, *dst, *bulksize, *retries, *sidx, *tidx)
 	if err != nil {
 		//t.Fatal(err)
