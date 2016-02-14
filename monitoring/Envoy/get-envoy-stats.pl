@@ -4,7 +4,7 @@ use LWP::UserAgent;
 use HTTP::Request;
 use HTTP::Response;
 
-my $ENVOYURL='http://192.168.2.95/production';
+my $ENVOYURL='http://192.168.2.95/production?locale=en';
 my $ua = LWP::UserAgent->new(
 	agent => "TinsOwn/v1.0 Tin",
 );
@@ -17,10 +17,15 @@ if ($response->is_error()) {
 } else {
 	$content = $response->content();
 }
+# print "content = [$content]\n";
 
+# ($livesince) = ($content =~ m#live since.+?good>\s+([,:\d\w]+)</div>#is);
 ($livesince) = ($content =~ m#live since.+?good>(.+?)</div>#is);
-($currently) = ($content =~ m#Currently.+?<td>\s+(\d+\.\d+\s+\w+)</td>#is);
-($today) = ($content =~ m#Today.+?<td>\s+(\d+\.\d+\s+\w+)</td>#is);
+($currently) = ($content =~ m#Currently.+?<td>\s+([\d\.]+?\s+\w+)</td>#is);
+($today) = ($content =~ m#Today.+?<td>\s+([\d\.]+?\s+\w+)</td>#is);
+
+# print "currently = [$currently]\n";
+# print "today = [$today]\n";
 
 my $ncurrently = 0.0;
 my $ntoday = 0.0;
