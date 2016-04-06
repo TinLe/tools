@@ -36,6 +36,7 @@ var (
 )
 
 func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexName string) (count int, err error) {
+
 	// Create a src client
 	sourceClient, err := elastic.NewClient(
 		elastic.SetURL(src),
