@@ -1,0 +1,5 @@
+This is a command line tool to dump data from an index.  You can give it a query to dump only records
+matching that query.   Defaults to dumping everything if you do not give it a query, e.g. query of '*'.
+
+The output is raw json from Elasticsearch.
+
