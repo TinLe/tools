@@ -1,0 +1,25 @@
+# Remember, leave a key empty if there is no value.  None will be a string,
+# not a Python "NoneType"
+client:
+  hosts:
+    - 192.168.2.3
+    - 192.168.2.4
+    - 192.168.2.110
+  port: 9200
+  url_prefix:
+  use_ssl: False
+  certificate:
+  client_cert:
+  client_key:
+  aws_key:
+  aws_secret_key:
+  aws_region:
+  ssl_no_validate: False
+  http_auth:
+  timeout: 60
+  master_only: False
+
+logging:
+  loglevel: INFO
+  logfile:
+  logformat: default
