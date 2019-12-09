@@ -15,15 +15,19 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
-	"gopkg.in/olivere/elastic.v2"
+	"log"
 	"strings"
 	"time"
+	elasticsearch5 "github.com/elastic/go-elasticsearch/v5"
+	elasticsearch6 "github.com/elastic/go-elasticsearch/v6"
+	elasticsearch7 "github.com/elastic/go-elasticsearch/v7"
 )
 
 var (
-	ProgramVersion = "espipe v1.0.0\n"
+	ProgramVersion = "espipe v1.0.1\n"
 	version        = flag.Bool("version", false, ProgramVersion)
 	src            = flag.String("src", "http://localhost:9200", "Source ES cluster")
 	dst            = flag.String("dst", "http://localhost:9200", "Destination ES cluster")
@@ -37,10 +41,15 @@ var (
 
 func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexName string) (count int, err error) {
 
+	// Setup client config
+	cfg6 = elasticsearch5.Config{
+		Addresses: []string{ src },
+
+	}
 	// Create a src client
-	sourceClient, err := elastic.NewClient(
+	e5sourceClient, err := elasticsearch5.NewDefaultClient(
 		elastic.SetURL(src),
-		elastic.SetSniff(false),
+		elastic.SetSniff(true),
 		elastic.SetMaxRetries(retries))
 	if err != nil {
 		// Handle error
@@ -56,6 +65,19 @@ func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexNa
 		// Handle error
 		fmt.Printf("Unable to connect to dst: %s, err: %s", dst, err)
 	}
+
+    // Set some flags first
+    DisableWrite = '{"index.blocks.write": true}'
+    settings, err := sourceClient.IndexPutSettings().
+        Index(sourceIndexName).
+        BodyString(DisableWrite).
+        Do(context.TODO())
+    if err != nill {
+		fmt.Printf("Unable to set flags on index : %s, err: %s", sourceIndexName, err)
+    }
+    if settings.Acknowledged {
+		fmt.Printf("Successfully DisableWrite on index : %s, err: %s", sourceIndexName, err)
+    }
 
 	// setup progress function
 	sourceCount, err := sourceClient.Count(sourceIndexName).Do()
@@ -80,7 +102,10 @@ func Reindex(src, dst string, bsize, retries int, sourceIndexName, targetIndexNa
 	}
 
 	// Start the copy
-	r := elastic.NewReindexer(sourceClient, sourceIndexName, elastic.CopyToTargetIndex(targetIndexName))
+	// r := elastic.NewReindexer(sourceClient, sourceIndexName, elastic.CopyToTargetIndex(targetIndexName))
+	r := elastic.Reindex.WaitForActiveShards("all").
+        SourceIndex.(sourceClient).
+        DestinationIndex(sourceIndexName, elastic.CopyToTargetIndex(targetIndexName))
 	r = r.TargetClient(targetClient).Progress(progress).BulkSize(bsize)
 	startTime := time.Now()
 	ret, err := r.Do()
