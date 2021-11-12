@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PATH=/home/tin/.local/bin:$PATH
+
 # remove all indices older than 30 days
 #curator delete indices --older-than 60 --time-unit days --timestring '%Y.%m.%d'
 
