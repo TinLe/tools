@@ -9,7 +9,8 @@ Author: Marmsoler Diego
 <?php require_once './includes/config.php.inc'; ?>
 <!-- Import jQuery and SimpleModal source files -->
 <?php if (!isset($jQuery) || $jQuery==true) {
-    echo "<script src='js/jQuery/jquery.js' type='text/javascript'></script>";
+    echo "<script src='js/jq/jquery-3.6.1.min.js' type='text/javascript'></script>";
+    echo "<script src='js/jq/jquery-3.6.1.min.map' type='text/javascript'></script>";
 }?>
 <script>
 	function fullscreenEmpty() {
@@ -24,7 +25,6 @@ Author: Marmsoler Diego
         }
     }
 </script>
-<script src='js/jQuery/jquery.simplemodal.js' type='text/javascript'></script>
 <!-- Contact Form JS and CSS files -->
 <script src='ajax/boardForm/dynamicForm.js' type='text/javascript'></script>
 <link type='text/css' href='css/contact.css' rel='stylesheet' media='screen' />

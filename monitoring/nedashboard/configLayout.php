@@ -81,11 +81,8 @@ include_once("layout/class.tacho.element"); ?>
             cursor: pointer;
         }
         </style>
-        <script src="js/jQuery/jquery.js"></script>
-        <script src="js/jQuery/jquery.ui.core.js"></script>
-        <script src="js/jQuery/jquery.ui.sortable.js"></script>
-        <script src="js/jQuery/jquery.ui.draggable.js"></script>
-        <script src="js/jQuery/jquery.ui.droppable.js"></script>
+        <script src="js/jq/jquery-3.6.1.min.js"></script>
+        <script src="js/jq/jquery-3.6.1.min.map"></script>
         <script src="js/interface.js"></script>
         <script>
             $(document).ready(
