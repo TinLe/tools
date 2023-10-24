@@ -1,4 +1,0 @@
-AuthName "NetEye Access"
-AuthType Basic
-AuthUserFile /etc/nagios/htpasswd.users
-require valid-user
